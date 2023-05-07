@@ -97,8 +97,9 @@ async function adb_install_apk(param) {
  * @description 卸载apk
  */
 async function adb_uninstall_apk() {
-    let packageName = await chooseApkPackageName();
-    if (packageName == undefined) return;
+    let info = await chooseApkPackageName();
+    if (info == undefined) return;
+    let { packageName } = info;
 
     hxConsoleOutput(`adb uninstall ${packageName} ......`);
     let cmd = `${adbPath} -s ${current_serialno_id} uninstall ${packageName}`;
@@ -106,6 +107,23 @@ async function adb_uninstall_apk() {
         hxConsoleOutput(`adb卸载app成功。`);
     }).catch((err) => {
         hxConsoleOutput(`adb卸载app失败。具体错误: ${err}`, 'error');
+    })
+};
+
+/**
+ * @description 清除app数据
+ */
+async function adb_clear_app_data() {
+    let info = await chooseApkPackageName();
+    if (info == undefined) return;
+    let { packageName } = info;
+
+    hxConsoleOutput(`adb shell pm clear ${packageName} ......`);
+    let cmd = `${adbPath} -s ${current_serialno_id} shell pm clear ${packageName}`;
+    await adbRun(cmd).then(result=> {
+        hxConsoleOutput(`清除app数据成功。`);
+    }).catch((err) => {
+        hxConsoleOutput(`清除app数据失败。具体错误: ${err}`, 'error');
     })
 };
 
@@ -194,6 +212,9 @@ async function adb_assistant(action, param) {
             break;
         case 'screenshot':
             adb_screenshot();
+            break;
+        case 'app_clear_data':
+            adb_clear_app_data();
             break;
         case 'app_start_time':
             get_app_start_time();

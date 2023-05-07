@@ -36,6 +36,12 @@ function activate(context) {
         adb_assistant("screenshot", param);
     });
     context.subscriptions.push(adb_screenshot);
+
+    // adb清除app数据
+    let adb_app_clear_data = hx.commands.registerCommand('adb_assistant.app_clear_data', (param) => {
+        adb_assistant("app_clear_data", param);
+    });
+    context.subscriptions.push(adb_app_clear_data);
 };
 
 

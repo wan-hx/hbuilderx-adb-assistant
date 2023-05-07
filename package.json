@@ -18,7 +18,8 @@
         "onCommand:adb_assistant.install_apk",
         "onCommand:adb_assistant.uninstall_apk",
         "onCommand:adb_assistant.get_app_startup_time",
-        "onCommand:adb_assistant.screenshot"
+        "onCommand:adb_assistant.screenshot",
+        "onCommand:adb_assistant.app_clear_data"
     ],
     "contributes": {
         "commands": [
@@ -45,6 +46,10 @@
             {
                 "command": "adb_assistant.screenshot",
                 "title": "手机屏幕截图(&S)"
+            },
+            {
+                "command": "adb_assistant.app_clear_data",
+                "title": "清除应用数据(&C)"
             }
         ],
         "menus": {
@@ -69,16 +74,26 @@
                     "group": "adb_assistant@2"
                 },
                 {
-                    "command": "adb_assistant.install_apk",
                     "group": "adb_assistant@2"
+                },
+                {
+                    "command": "adb_assistant.install_apk",
+                    "group": "adb_assistant@3"
                 },
                 {
                     "command": "adb_assistant.uninstall_apk",
-                    "group": "adb_assistant@2"
+                    "group": "adb_assistant@3"
                 },
                 {
                     "command": "adb_assistant.screenshot",
-                    "group": "adb_assistant@2"
+                    "group": "adb_assistant@3"
+                },
+                {
+                    "group": "adb_assistant@4"
+                },
+                {
+                    "command": "adb_assistant.app_clear_data",
+                    "group": "adb_assistant@4"
                 },
                 {
                     "group": "adb_assistant@5"
