@@ -39,7 +39,7 @@
             },
             {
                 "command": "adb_assistant.screenshot",
-                "title": "截图(&S)"
+                "title": "手机屏幕截图(&S)"
             }
         ],
         "menus": {
