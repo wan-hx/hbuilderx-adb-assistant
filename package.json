@@ -1,0 +1,48 @@
+{
+    "id": "hbuilderx-adb-assistant",
+    "name": "hbuilderx-adb-assistant",
+    "description": "Android adb命令工具集合，比如安装apk、apk性能分析、截图、查看日志等",
+    "displayName": "Android adb工具助理",
+    "version": "0.0.1",
+    "publisher": "oneone",
+    "engines": {
+        "HBuilderX": "^2.7.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "main": "./src/extension.js",
+    "activationEvents": [
+        "onCommand:adb_assistant.main",
+        "onCommand:adb_assistant.install_apk"
+    ],
+    "contributes": {
+        "commands": [{
+            "command": "adb_assistant.main",
+            "title": "adb命令工具(&M)"
+        },{
+            "command": "adb_assistant.install_apk",
+            "title": "adb安装apk(&I)"
+        }],
+        "menus": {
+            "editor/context": [{
+                    "command": "adb_assistant.main",
+                    "group": "z_commands",
+                    "when": "editorTextFocus"
+                },
+                {
+                    "command": "adb_assistant.install_apk",
+                    "group": "z_commands",
+                    "when": "editorTextFocus"
+                },
+                {
+                    "group": "z_commands"
+                }
+            ]
+        }
+    },
+    "extensionDependencies": [
+        "plugin-manager"
+    ],
+    "dependencies": {}
+}
