@@ -10,6 +10,10 @@ const {
     hxConsoleOutput
 } = require("./utils/hx_utils.js");
 
+const {
+    getCurrentTime
+} = require("./utils/public_utils.js");
+
 const getApkPackageInfo = require("./views/apk_package_info.js");
 
 // 定义adb路径
@@ -81,6 +85,35 @@ async function adb_install(apkPath) {
 };
 
 /**
+ * @description adb截图
+ */
+async function adb_screenshot() {
+    hxConsoleOutput(`正在截图......`);
+
+    let current_time = getCurrentTime("_");
+    let screenshot_name = `/sdcard/screenshot_${current_time}.png`;
+
+    // 开始截图
+    let cmd = `${adbPath} -s ${current_serialno_id} shell screencap -p ${screenshot_name}`;
+    let screencap_result = await adbRun(cmd).catch((err) => {
+        hxConsoleOutput(`adb截图失败.`, 'error');
+        hxConsoleOutput(`具体错误: ${err}`, 'error');
+    });
+
+    // 截图成功后，将截图保存到电脑桌面
+    if (screencap_result) {
+        hxConsoleOutput(`adb截图成功，已保存到手机sdcard/screenshot.png`);
+        let pc_screenshot_path = path.join(os.homedir(), "Desktop", screenshot_name);
+        let cmd2 = `${adbPath} -s ${current_serialno_id} pull ${screenshot_name} ${pc_screenshot_path}`;
+        adbRun(cmd2).then(result=> {
+            hxConsoleOutput(`截图从手机发送到电脑，具体路径: ${pc_screenshot_path}`, 'success');
+        }).catch((err) => {
+            hxConsoleOutput(`将截图从手机向电脑传送时失败.具体错误: ${err}`, 'error');
+        });
+    };
+};
+
+/**
  * @description 获取app启动时间
  */
 async function get_app_start_time() {
@@ -128,8 +161,12 @@ async function adb_assistant(action, param) {
             break;
         case 'install_apk':
             adb_install("/Applications/HBuilderX.app/Contents/HBuilderX/plugins/launcher/base/android_base.apk");
+        case 'screenshot':
+            adb_screenshot();
+            break;
         case 'app_start_time':
             get_app_start_time();
+            break;
         default:
             break;
     }

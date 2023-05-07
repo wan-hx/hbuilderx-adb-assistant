@@ -24,6 +24,12 @@ function activate(context) {
         adb_assistant("app_start_time", param);
     });
     context.subscriptions.push(get_app_startup_time);
+
+    // adb截图
+    let adb_screenshot = hx.commands.registerCommand('adb_assistant.screenshot', (param) => {
+        adb_assistant("screenshot", param);
+    });
+    context.subscriptions.push(adb_screenshot);
 };
 
 

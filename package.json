@@ -16,7 +16,8 @@
         "onCommand:adb_assistant.main",
         "onCommand:adb_assistant.get_android_devices",
         "onCommand:adb_assistant.install_apk",
-        "onCommand:adb_assistant.get_app_startup_time"
+        "onCommand:adb_assistant.get_app_startup_time",
+        "onCommand:adb_assistant.screenshot"
     ],
     "contributes": {
         "commands": [
@@ -35,6 +36,10 @@
             {
                 "command": "adb_assistant.get_app_startup_time",
                 "title": "获取应用启动时间(&I)"
+            },
+            {
+                "command": "adb_assistant.screenshot",
+                "title": "截图(&S)"
             }
         ],
         "menus": {
@@ -60,6 +65,10 @@
                 },
                 {
                     "command": "adb_assistant.install_apk",
+                    "group": "adb_assistant@2"
+                },
+                {
+                    "command": "adb_assistant.screenshot",
                     "group": "adb_assistant@2"
                 },
                 {

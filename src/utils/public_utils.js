@@ -4,7 +4,7 @@ const https = require('https');
 /**
  * @description 获取当前时间
  */
-function getCurrentTime() {
+function getCurrentTime(format = ":") {
     let now = new Date();
     let year = now.getFullYear();
     let month = now.getMonth() + 1;
@@ -12,6 +12,10 @@ function getCurrentTime() {
     let hours = now.getHours();
     let minutes = now.getMinutes();
     let seconds = now.getSeconds();
+    
+    if (format == "_") {
+        return year + '' + month + '' + day + '_' + hours + '' + minutes + '' + seconds;
+    };
     return year + '/' + month + '/' + day + ' ' + hours + ':' + minutes + ':' + seconds;
 };
 
