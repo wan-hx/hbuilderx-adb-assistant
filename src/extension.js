@@ -19,6 +19,12 @@ function activate(context) {
     });
     context.subscriptions.push(install_apk);
 
+    // 卸载apk
+    let uninstall_apk = hx.commands.registerCommand('adb_assistant.uninstall_apk', (param) => {
+        adb_assistant("uninstall_apk", param);
+    });
+    context.subscriptions.push(uninstall_apk);
+
     // 获取app启动时间
     let get_app_startup_time = hx.commands.registerCommand('adb_assistant.get_app_startup_time', (param) => {
         adb_assistant("app_start_time", param);

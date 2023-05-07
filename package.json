@@ -16,6 +16,7 @@
         "onCommand:adb_assistant.main",
         "onCommand:adb_assistant.get_android_devices",
         "onCommand:adb_assistant.install_apk",
+        "onCommand:adb_assistant.uninstall_apk",
         "onCommand:adb_assistant.get_app_startup_time",
         "onCommand:adb_assistant.screenshot"
     ],
@@ -32,6 +33,10 @@
             {
                 "command": "adb_assistant.install_apk",
                 "title": "安装apk到手机(&I)"
+            },
+            {
+                "command": "adb_assistant.uninstall_apk",
+                "title": "卸载手机某个应用(&U)"
             },
             {
                 "command": "adb_assistant.get_app_startup_time",
@@ -65,6 +70,10 @@
                 },
                 {
                     "command": "adb_assistant.install_apk",
+                    "group": "adb_assistant@2"
+                },
+                {
+                    "command": "adb_assistant.uninstall_apk",
                     "group": "adb_assistant@2"
                 },
                 {

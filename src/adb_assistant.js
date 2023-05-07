@@ -15,6 +15,8 @@ const {
 } = require("./utils/public_utils.js");
 
 const getApkPackageInfo = require("./views/apk_package_info.js");
+const chooseApkPath = require('./views/choose_apk_path.js');
+const chooseApkPackageName = require('./views/choose_apk_package_name.js');
 
 // 定义adb路径
 var adbPath = "";
@@ -25,6 +27,7 @@ var current_serialno_id = undefined;
 // 内置工具目录和adb路径
 var built_in_tool_dir = path.join(__dirname, 'tools', osName);
 var built_in_adb_path = path.join(built_in_tool_dir, 'adb');
+
 
 /**
  * @description 公共方法：执行adb命令
@@ -42,6 +45,7 @@ function adbRun(cmd) {
         });
     });
 };
+
 
 /**
  * @description 获取android设备列表
@@ -69,10 +73,14 @@ async function get_android_devices(isPrint = false) {
     };
 };
 
+
 /**
  * @description 安装apk
  */
-async function adb_install(apkPath) {
+async function adb_install_apk(param) {
+    let apkPath = await chooseApkPath();
+    if (apkPath == undefined) return;
+
     hxConsoleOutput(`adb install ${apkPath} ......`);
     let cmd = `${adbPath} -s ${current_serialno_id} install -r ${apkPath}`;
     let result = await adbRun(cmd).catch((err) => {
@@ -83,6 +91,24 @@ async function adb_install(apkPath) {
         hxConsoleOutput(`adb install apk.apk 执行结果: ${result}`);
     };
 };
+
+
+/**
+ * @description 卸载apk
+ */
+async function adb_uninstall_apk() {
+    let packageName = await chooseApkPackageName();
+    if (packageName == undefined) return;
+
+    hxConsoleOutput(`adb uninstall ${packageName} ......`);
+    let cmd = `${adbPath} -s ${current_serialno_id} uninstall ${packageName}`;
+    await adbRun(cmd).then(result=> {
+        hxConsoleOutput(`adb卸载app成功。`);
+    }).catch((err) => {
+        hxConsoleOutput(`adb卸载app失败。具体错误: ${err}`, 'error');
+    })
+};
+
 
 /**
  * @description adb截图
@@ -112,6 +138,7 @@ async function adb_screenshot() {
         });
     };
 };
+
 
 /**
  * @description 获取app启动时间
@@ -151,16 +178,20 @@ async function adb_assistant(action, param) {
         return hxMessageInfo("Adb命令不存在, 请检查插件是否完整安装，或重装插件。")
     };
 
-    let deviceList = await get_android_devices();
-    if (deviceList == undefined) return;
-    current_serialno_id = deviceList[0];
+    // let deviceList = await get_android_devices();
+    // if (deviceList == undefined) return;
+    // current_serialno_id = deviceList[0];
 
     switch (action) {
         case 'devices':
             get_android_devices(true);
             break;
         case 'install_apk':
-            adb_install("/Applications/HBuilderX.app/Contents/HBuilderX/plugins/launcher/base/android_base.apk");
+            adb_install_apk(param);
+            break;
+        case 'uninstall_apk':
+            adb_uninstall_apk(param);
+            break;
         case 'screenshot':
             adb_screenshot();
             break;
