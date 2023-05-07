@@ -42,6 +42,12 @@ function activate(context) {
         adb_assistant("app_clear_data", param);
     });
     context.subscriptions.push(adb_app_clear_data);
+
+    // 获取app内存占用
+    let adb_app_memory = hx.commands.registerCommand('adb_assistant.app_memory', (param) => {
+        adb_assistant("app_memory", param);
+    });
+    context.subscriptions.push(adb_app_memory);
 };
 
 

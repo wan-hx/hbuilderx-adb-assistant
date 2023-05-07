@@ -181,6 +181,24 @@ async function get_app_start_time() {
 
 
 /**
+ * @description 获取app内存
+ */
+async function get_app_memory() {
+    let info = await chooseApkPackageName();
+    if (info == undefined) return;
+    let { packageName } = info;
+
+    hxConsoleOutput(`adb shell dumpsys meminfo ${packageName} ......`);
+    let cmd = `${adbPath} -s ${current_serialno_id} shell dumpsys meminfo ${packageName}`;
+    await adbRun(cmd).then(result=> {
+        hxConsoleOutput(`获取内存占用信息如下：${result}`);
+    }).catch((err) => {
+        hxConsoleOutput(`获取内存占用信息失败。具体错误: ${err}`, 'error');
+    })
+};
+
+
+/**
  * @description adb助手
  * @param {*} action
  * @param {*} param
@@ -218,6 +236,9 @@ async function adb_assistant(action, param) {
             break;
         case 'app_start_time':
             get_app_start_time();
+            break;
+        case 'app_memory':
+            get_app_memory();
             break;
         default:
             break;

@@ -18,6 +18,7 @@
         "onCommand:adb_assistant.install_apk",
         "onCommand:adb_assistant.uninstall_apk",
         "onCommand:adb_assistant.get_app_startup_time",
+        "onCommand:adb_assistant.get_app_memory",
         "onCommand:adb_assistant.screenshot",
         "onCommand:adb_assistant.app_clear_data"
     ],
@@ -42,6 +43,10 @@
             {
                 "command": "adb_assistant.get_app_startup_time",
                 "title": "获取应用启动时间(&I)"
+            },
+            {
+                "command": "adb_assistant.get_app_memory",
+                "title": "获取应用内存占用(&M)"
             },
             {
                 "command": "adb_assistant.screenshot",
@@ -100,6 +105,10 @@
                 },
                 {
                     "command": "adb_assistant.get_app_startup_time",
+                    "group": "adb_assistant@5"
+                },
+                {
+                    "command": "adb_assistant.get_app_memory",
                     "group": "adb_assistant@5"
                 }
             ]
