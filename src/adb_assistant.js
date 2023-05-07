@@ -41,9 +41,15 @@ function adbRun(cmd) {
  * @description 获取android设备列表
  * @returns {Array} 手机设备列表
  */
-async function get_android_devices() {
+async function get_android_devices(isPrint = false) {
     let cmd = `${adbPath} devices -l`;
     let result = await adbRun(cmd);
+
+    if (isPrint) {
+        hxConsoleOutput(`adb devices命令输出：${result}`);
+        return;
+    };
+
     if (result.trim() == 'List of devices attached') {
         hxConsoleOutput(`adb devices命令输出：${result}`);
         hxConsoleOutput("没有查找到Android设备，请检查设备是否连接。", "error");
@@ -94,6 +100,9 @@ async function adb_assistant(action, param) {
     current_serialno_id = deviceList[0];
 
     switch (action) {
+        case 'devices':
+            get_android_devices(true);
+            break;
         case 'install_apk':
             adb_install("/Applications/HBuilderX.app/Contents/HBuilderX/plugins/launcher/base/android_base.apk");
         case 'adb_version':
