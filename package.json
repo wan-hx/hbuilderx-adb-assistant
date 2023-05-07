@@ -15,7 +15,8 @@
     "activationEvents": [
         "onCommand:adb_assistant.main",
         "onCommand:adb_assistant.get_android_devices",
-        "onCommand:adb_assistant.install_apk"
+        "onCommand:adb_assistant.install_apk",
+        "onCommand:adb_assistant.get_app_startup_time"
     ],
     "contributes": {
         "commands": [
@@ -29,7 +30,11 @@
             },
             {
                 "command": "adb_assistant.install_apk",
-                "title": "adb安装apk(&I)"
+                "title": "安装apk到手机(&I)"
+            },
+            {
+                "command": "adb_assistant.get_app_startup_time",
+                "title": "获取应用启动时间(&I)"
             }
         ],
         "menus": {
@@ -56,6 +61,13 @@
                 {
                     "command": "adb_assistant.install_apk",
                     "group": "adb_assistant@2"
+                },
+                {
+                    "group": "adb_assistant@5"
+                },
+                {
+                    "command": "adb_assistant.get_app_startup_time",
+                    "group": "adb_assistant@5"
                 }
             ]
         }

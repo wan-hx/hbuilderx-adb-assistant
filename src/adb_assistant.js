@@ -10,6 +10,8 @@ const {
     hxConsoleOutput
 } = require("./utils/hx_utils.js");
 
+const getApkPackageInfo = require("./views/apk_package_info.js");
+
 // 定义adb路径
 var adbPath = "";
 
@@ -78,6 +80,27 @@ async function adb_install(apkPath) {
     };
 };
 
+/**
+ * @description 获取app启动时间
+ */
+async function get_app_start_time() {
+    let packageInfo = await getApkPackageInfo();
+    if (packageInfo == undefined) return;
+
+    let { packageName, activityName } = packageInfo;
+
+    hxConsoleOutput(`正在获取应用启动时间......`);
+    let cmd = `${adbPath} -s ${current_serialno_id} shell am start -W ${packageName}/${activityName}`;
+    let result = await adbRun(cmd).catch((err) => {
+        hxConsoleOutput(`adb获取app启动时间失败.`, 'error');
+        hxConsoleOutput(`具体错误: ${err}`, 'error');
+    });
+    if (result) {
+        hxConsoleOutput("获取应用启动时间，结果如下:`");
+        hxConsoleOutput(result);
+    };
+};
+
 
 /**
  * @description adb助手
@@ -105,8 +128,8 @@ async function adb_assistant(action, param) {
             break;
         case 'install_apk':
             adb_install("/Applications/HBuilderX.app/Contents/HBuilderX/plugins/launcher/base/android_base.apk");
-        case 'adb_version':
-            return adbRun(`${adbPath} version`);
+        case 'app_start_time':
+            get_app_start_time();
         default:
             break;
     }
