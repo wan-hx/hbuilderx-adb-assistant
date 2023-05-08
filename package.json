@@ -20,7 +20,8 @@
         "onCommand:adb_assistant.get_app_startup_time",
         "onCommand:adb_assistant.get_app_memory",
         "onCommand:adb_assistant.screenshot",
-        "onCommand:adb_assistant.app_clear_data"
+        "onCommand:adb_assistant.app_clear_data",
+        "onCommand:adb_assistant.logcat"
     ],
     "contributes": {
         "commands": [
@@ -55,6 +56,10 @@
             {
                 "command": "adb_assistant.app_clear_data",
                 "title": "清除应用数据(&C)"
+            },
+            {
+                "command": "adb_assistant.logcat",
+                "title": "查看手机日志(&L)"
             }
         ],
         "menus": {
@@ -101,6 +106,10 @@
                     "group": "adb_assistant@4"
                 },
                 {
+                    "group": "adb_assistant@5"
+                },
+                {
+                    "command": "adb_assistant.logcat",
                     "group": "adb_assistant@5"
                 },
                 {

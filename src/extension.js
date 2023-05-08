@@ -48,6 +48,12 @@ function activate(context) {
         adb_assistant("app_memory", param);
     });
     context.subscriptions.push(adb_app_memory);
+
+    // 获取adb logcat日志
+    let adb_logcat = hx.commands.registerCommand('adb_assistant.logcat', (param) => {
+        adb_assistant("logcat", param);
+    });
+    context.subscriptions.push(adb_logcat);
 };
 
 

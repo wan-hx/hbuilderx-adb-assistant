@@ -15,6 +15,7 @@ const adb_uninstall_apk = require("./utils/adb_uninstall_apk.js");
 const adb_clear_app_data = require("./utils/adb_clear_app_data.js");
 const get_app_start_time = require('./utils/adb_get_app_start_time.js');
 const get_app_memory = require('./utils/adb_memory.js');
+const adb_logcat = require('./utils/adb_logcat.js');
 
 // 全局：定义adb路径
 var adbPath = "";
@@ -67,6 +68,9 @@ async function adb_assistant(action, param) {
             break;
         case 'app_memory':
             get_app_memory(adbPath, serialno_id);
+            break;
+        case 'logcat':
+            adb_logcat(adbPath, serialno_id);
             break;
         default:
             break;
