@@ -54,6 +54,12 @@ function activate(context) {
         adb_assistant("logcat", param);
     });
     context.subscriptions.push(adb_logcat);
+
+    // 列表显示手机上的所有app
+    let adb_shell_pm_list_packages = hx.commands.registerCommand('adb_assistant.shell_pm_list_packages', (param) => {
+        adb_assistant("shell_pm_list_packages", param);
+    });
+    context.subscriptions.push(adb_shell_pm_list_packages);
 };
 
 

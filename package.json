@@ -21,7 +21,8 @@
         "onCommand:adb_assistant.get_app_memory",
         "onCommand:adb_assistant.screenshot",
         "onCommand:adb_assistant.app_clear_data",
-        "onCommand:adb_assistant.logcat"
+        "onCommand:adb_assistant.logcat",
+        "onCommand:adb_assistant.shell_pm_list_packages"
     ],
     "contributes": {
         "commands": [
@@ -60,6 +61,10 @@
             {
                 "command": "adb_assistant.logcat",
                 "title": "查看手机日志(&L)"
+            },
+            {
+                "command": "adb_assistant.shell_pm_list_packages",
+                "title": "列出手机所有软件包信息(&P)"
             }
         ],
         "menus": {
@@ -119,6 +124,13 @@
                 {
                     "command": "adb_assistant.get_app_memory",
                     "group": "adb_assistant@5"
+                },
+                {
+                    "group": "adb_assistant@6"
+                },
+                {
+                    "command": "adb_assistant.shell_pm_list_packages",
+                    "group": "adb_assistant@6"
                 }
             ]
         }

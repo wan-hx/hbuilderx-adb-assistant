@@ -17,6 +17,10 @@ const get_app_start_time = require('./utils/adb_get_app_start_time.js');
 const get_app_memory = require('./utils/adb_memory.js');
 const adb_logcat = require('./utils/adb_logcat.js');
 
+const {
+    adb_shell_pm_list_packages
+} = require("./utils/adb_shell_pm.js");
+
 // 全局：定义adb路径
 var adbPath = "";
 
@@ -71,6 +75,9 @@ async function adb_assistant(action, param) {
             break;
         case 'logcat':
             adb_logcat(adbPath, serialno_id);
+            break;
+        case 'shell_pm_list_packages':
+            adb_shell_pm_list_packages(adbPath, serialno_id);
             break;
         default:
             break;
