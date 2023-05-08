@@ -8,7 +8,7 @@ const {
 /**
  * @description 获取app内存
  */
-async function get_app_memory(adbPath, serialno_id) {
+async function adb_shell_dumpsys_meminfo(adbPath, serialno_id) {
     let info = await chooseApkPackageName();
     if (info == undefined) return;
     let { packageName } = info;
@@ -22,4 +22,4 @@ async function get_app_memory(adbPath, serialno_id) {
     })
 };
 
-module.exports = get_app_memory;
+module.exports = adb_shell_dumpsys_meminfo;

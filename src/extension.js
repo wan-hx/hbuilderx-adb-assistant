@@ -26,8 +26,8 @@ function activate(context) {
     context.subscriptions.push(uninstall_apk);
 
     // 获取app启动时间
-    let get_app_startup_time = hx.commands.registerCommand('adb_assistant.get_app_startup_time', (param) => {
-        adb_assistant("app_start_time", param);
+    let get_app_startup_time = hx.commands.registerCommand('adb_assistant.shell_am_start_time', (param) => {
+        adb_assistant("shell_am_start_time", param);
     });
     context.subscriptions.push(get_app_startup_time);
 
@@ -37,15 +37,21 @@ function activate(context) {
     });
     context.subscriptions.push(adb_screenshot);
 
+    // shell screenrecord
+    let adb_screenrecord = hx.commands.registerCommand('adb_assistant.screenrecord', (param) => {
+        adb_assistant("screenrecord", param);
+    });
+    context.subscriptions.push(adb_screenrecord);
+
     // adb清除app数据
-    let adb_app_clear_data = hx.commands.registerCommand('adb_assistant.app_clear_data', (param) => {
-        adb_assistant("app_clear_data", param);
+    let adb_app_clear_data = hx.commands.registerCommand('adb_assistant.shell_pm_clear', (param) => {
+        adb_assistant("shell_pm_clear", param);
     });
     context.subscriptions.push(adb_app_clear_data);
 
     // 获取app内存占用
-    let adb_app_memory = hx.commands.registerCommand('adb_assistant.app_memory', (param) => {
-        adb_assistant("app_memory", param);
+    let adb_app_memory = hx.commands.registerCommand('adb_assistant.shell_dumpsys_meminfo', (param) => {
+        adb_assistant("shell_dumpsys_meminfo", param);
     });
     context.subscriptions.push(adb_app_memory);
 

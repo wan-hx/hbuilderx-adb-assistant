@@ -9,7 +9,7 @@ const {
 /**
  * @description 获取app启动时间
  */
-async function get_app_start_time(adbPath, serialno_id) {
+async function adb_shell_am_start_time(adbPath, serialno_id) {
     let packageInfo = await getApkPackageInfo();
     if (packageInfo == undefined) return;
 
@@ -28,4 +28,6 @@ async function get_app_start_time(adbPath, serialno_id) {
     };
 };
 
-module.exports = get_app_start_time;
+module.exports = {
+    adb_shell_am_start_time
+};

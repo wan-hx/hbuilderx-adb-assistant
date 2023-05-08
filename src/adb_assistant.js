@@ -9,15 +9,20 @@ const {
 } = require("./utils/hx_utils.js");
 
 const get_android_devices = require("./utils/adb_devices.js");
-const adb_screenshot = require("./utils/adb_screenshot.js");
 const adb_install_apk = require("./utils/adb_install_apk.js");
 const adb_uninstall_apk = require("./utils/adb_uninstall_apk.js");
-const adb_clear_app_data = require("./utils/adb_clear_app_data.js");
-const get_app_start_time = require('./utils/adb_get_app_start_time.js');
-const get_app_memory = require('./utils/adb_memory.js');
 const adb_logcat = require('./utils/adb_logcat.js');
 
+const adb_screenshot = require("./utils/adb_screenshot.js");
+const adb_screenrecord = require("./utils/adb_screenrecord.js");
+
 const {
+    adb_shell_am_start_time
+} = require("./utils/adb_shell_am.js");
+
+const adb_shell_dumpsys_meminfo = require('./utils/adb_shell_dumpsys_meminfo.js');
+const {
+    adb_shell_pm_clear,
     adb_shell_pm_list_packages
 } = require("./utils/adb_shell_pm.js");
 
@@ -64,17 +69,20 @@ async function adb_assistant(action, param) {
         case 'screenshot':
             adb_screenshot(adbPath, serialno_id);
             break;
-        case 'app_clear_data':
-            adb_clear_app_data(adbPath, serialno_id);
-            break;
-        case 'app_start_time':
-            get_app_start_time(adbPath, serialno_id);
-            break;
-        case 'app_memory':
-            get_app_memory(adbPath, serialno_id);
+        case 'screenrecord':
+            adb_screenrecord(adbPath, serialno_id);
             break;
         case 'logcat':
             adb_logcat(adbPath, serialno_id);
+            break;
+        case 'shell_am_start_time':
+            adb_shell_am_start_time(adbPath, serialno_id);
+            break;
+        case 'shell_dumpsys_meminfo':
+            adb_shell_dumpsys_meminfo(adbPath, serialno_id);
+            break;
+        case 'shell_pm_clear':
+            adb_shell_pm_clear(adbPath, serialno_id);
             break;
         case 'shell_pm_list_packages':
             adb_shell_pm_list_packages(adbPath, serialno_id);

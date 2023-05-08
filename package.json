@@ -17,11 +17,12 @@
         "onCommand:adb_assistant.get_android_devices",
         "onCommand:adb_assistant.install_apk",
         "onCommand:adb_assistant.uninstall_apk",
-        "onCommand:adb_assistant.get_app_startup_time",
-        "onCommand:adb_assistant.get_app_memory",
+        "onCommand:adb_assistant.shell_am_start_time",
         "onCommand:adb_assistant.screenshot",
-        "onCommand:adb_assistant.app_clear_data",
+        "onCommand:adb_assistant.screenrecord",
         "onCommand:adb_assistant.logcat",
+        "onCommand:adb_assistant.shell_dumpsys_meminfo",
+        "onCommand:adb_assistant.shell_pm_clear",
         "onCommand:adb_assistant.shell_pm_list_packages"
     ],
     "contributes": {
@@ -43,11 +44,11 @@
                 "title": "卸载手机某个应用(&U)"
             },
             {
-                "command": "adb_assistant.get_app_startup_time",
+                "command": "adb_assistant.shell_am_start_time",
                 "title": "获取应用启动时间(&I)"
             },
             {
-                "command": "adb_assistant.get_app_memory",
+                "command": "adb_assistant.shell_dumpsys_meminfo",
                 "title": "获取应用内存占用(&M)"
             },
             {
@@ -55,7 +56,11 @@
                 "title": "手机屏幕截图(&S)"
             },
             {
-                "command": "adb_assistant.app_clear_data",
+                "command": "adb_assistant.screenrecord",
+                "title": "手机屏幕录制(&R)"
+            },
+            {
+                "command": "adb_assistant.shell_pm_clear",
                 "title": "清除应用数据(&C)"
             },
             {
@@ -64,7 +69,7 @@
             },
             {
                 "command": "adb_assistant.shell_pm_list_packages",
-                "title": "列出手机所有软件包信息(&P)"
+                "title": "列出系统所有软件包信息(&P)"
             }
         ],
         "menus": {
@@ -104,10 +109,14 @@
                     "group": "adb_assistant@3"
                 },
                 {
+                    "command": "adb_assistant.screenrecord",
+                    "group": "adb_assistant@3"
+                },
+                {
                     "group": "adb_assistant@4"
                 },
                 {
-                    "command": "adb_assistant.app_clear_data",
+                    "command": "adb_assistant.shell_pm_clear",
                     "group": "adb_assistant@4"
                 },
                 {
@@ -118,11 +127,11 @@
                     "group": "adb_assistant@5"
                 },
                 {
-                    "command": "adb_assistant.get_app_startup_time",
+                    "command": "adb_assistant.shell_am_start_time",
                     "group": "adb_assistant@5"
                 },
                 {
-                    "command": "adb_assistant.get_app_memory",
+                    "command": "adb_assistant.shell_dumpsys_meminfo",
                     "group": "adb_assistant@5"
                 },
                 {
