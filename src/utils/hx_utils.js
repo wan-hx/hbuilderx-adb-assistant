@@ -83,6 +83,48 @@ function hxConsoleOutput(msg, msgLevel="info") {
     });
 };
 
+/**
+ * @description 创建输出控制台, 支持文件链接跳转
+ * @param {String} msg
+ * @param {String} msgLevel (warning | success | error | info), 控制文本颜色
+ * @param {String} linkText 链接文本
+ */
+function hxConsoleOutputForLink(msg, linkText, msgLevel='info') {
+    let outputView = hx.window.createOutputView({"id":"adbAssistant","title":"adb助手"});
+    outputView.show();
+
+    if (linkText == undefined || linkText == '') {
+        outputView.appendLine({
+            line: msg,
+            level: msgLevel,
+        });
+        return;
+    };
+
+    let start;
+    if (msg.includes(linkText) && linkText != undefined) {
+        start = msg.indexOf(linkText);
+    };
+
+    outputView.appendLine({
+        line: msg,
+        level: msgLevel,
+        hyperlinks:[
+            {
+                linkPosition: {
+                    start: start,
+                    end: start + linkText.length
+                },
+                onOpen: function() {
+                    if (fs.existsSync(linkText)) {
+                        return hx.workspace.openTextDocument(linkText);
+                    };
+                }
+            }
+        ]
+    });
+};
+
 
 /**
  * @description 右下角弹窗
@@ -119,5 +161,6 @@ module.exports = {
     hxConfigGet,
     hxConfigUpdate,
     hxConsoleOutput,
+    hxConsoleOutputForLink,
     hxParseSelectedFile
 }
