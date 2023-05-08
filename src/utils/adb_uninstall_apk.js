@@ -14,8 +14,11 @@ async function adb_uninstall_apk(adbPath, serialno_id) {
     if (info == undefined) return;
     let { packageName } = info;
 
-    hxConsoleOutput(`adb uninstall ${packageName} ......`);
     let cmd = `${adbPath} -s ${serialno_id} uninstall ${packageName}`;
+
+    hxConsoleOutput(`开始卸载应用 ${packageName} ......`);
+    hxConsoleOutput(`卸载命令: ${cmd}`);
+    
     await adbRun(cmd).then(result=> {
         hxConsoleOutput(`adb卸载app成功。`);
     }).catch((err) => {

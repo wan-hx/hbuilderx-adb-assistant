@@ -11,9 +11,10 @@ const {
 const get_android_devices = require("./utils/adb_devices.js");
 const adb_screenshot = require("./utils/adb_screenshot.js");
 const adb_install_apk = require("./utils/adb_install_apk.js");
-const adb_uninstall_apk = require("./utils/adb_install_apk.js");
+const adb_uninstall_apk = require("./utils/adb_uninstall_apk.js");
 const adb_clear_app_data = require("./utils/adb_clear_app_data.js");
 const get_app_start_time = require('./utils/adb_get_app_start_time.js');
+const get_app_memory = require('./utils/adb_memory.js');
 
 // 全局：定义adb路径
 var adbPath = "";
@@ -53,7 +54,7 @@ async function adb_assistant(action, param) {
             adb_install_apk(adbPath, serialno_id, param);
             break;
         case 'uninstall_apk':
-            adb_uninstall_apk(adbPath, serialno_id, param);
+            adb_uninstall_apk(adbPath, serialno_id);
             break;
         case 'screenshot':
             adb_screenshot(adbPath, serialno_id);

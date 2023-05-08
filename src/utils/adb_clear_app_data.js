@@ -13,9 +13,12 @@ async function adb_clear_app_data(adbPath, serialno_id) {
     if (info == undefined) return;
     let { packageName } = info;
 
-    hxConsoleOutput(`adb shell pm clear ${packageName} ......`);
     let cmd = `${adbPath} -s ${serialno_id} shell pm clear ${packageName}`;
-    await adbRun(cmd).then(result=> {
+
+    hxConsoleOutput(`开始清除App应用数据 ${packageName} ......`);
+    hxConsoleOutput(`清除命令: ${cmd}`);
+
+    await adbRun(cmd).then( ()=> {
         hxConsoleOutput(`清除app数据成功。`);
     }).catch((err) => {
         hxConsoleOutput(`清除app数据失败。具体错误: ${err}`, 'error');
