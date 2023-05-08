@@ -1,11 +1,11 @@
 const hx = require('hbuilderx');
-let http = require('http');
-let https = require('https');
-let os = require('os');
-let path = require('path');
-let fs = require('fs');
+const http = require('http');
+const https = require('https');
+const os = require('os');
+const path = require('path');
+const fs = require('fs');
 
-let osName = os.platform();
+const osName = os.platform();
 
 /**
  * @description 获取HBuilderX配置
@@ -93,10 +93,31 @@ function hxMessageInfo(msg) {
 };
 
 
+/**
+ * @description 解析HBuilderX编辑器中选中的文件
+ */
+async function hxParseSelectedFile(param, verfiyFileExtName="") {
+    let selectedFile = "";
+    try{
+        try {
+            selectedFile = param.fsPath;
+        } catch (e) {
+            selectedFile = param.document.uri.fsPath;
+        };
+    } catch(e){};
+    
+    if (selectedFile != "" && verfiyFileExtName != "") {
+        return path.extname(selectedFile) == verfiyFileExtName ? selectedFile : "";
+    };
+    return selectedFile;
+};
+
+
 module.exports = {
     hxMessageInfo,
     hxShowMessageBox,
     hxConfigGet,
     hxConfigUpdate,
     hxConsoleOutput,
+    hxParseSelectedFile
 }
