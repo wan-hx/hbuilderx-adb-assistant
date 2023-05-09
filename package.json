@@ -23,7 +23,8 @@
         "onCommand:adb_assistant.logcat",
         "onCommand:adb_assistant.shell_dumpsys_meminfo",
         "onCommand:adb_assistant.shell_pm_clear",
-        "onCommand:adb_assistant.shell_pm_list_packages"
+        "onCommand:adb_assistant.shell_pm_list_packages",
+        "onCommand:adb_assistant.shell_cmd_package_dump_profiles"
     ],
     "contributes": {
         "commands": [
@@ -70,6 +71,10 @@
             {
                 "command": "adb_assistant.shell_pm_list_packages",
                 "title": "列出手机软件包列表(&P)"
+            },
+            {
+                "command": "adb_assistant.shell_cmd_package_dump_profiles",
+                "title": "获取应用的 ART 配置文件，优化应用性能(&M)"
             }
         ],
         "menus": {
@@ -132,6 +137,10 @@
                 },
                 {
                     "command": "adb_assistant.shell_dumpsys_meminfo",
+                    "group": "adb_assistant@5"
+                },
+                {
+                    "command": "adb_assistant.shell_cmd_package_dump_profiles",
                     "group": "adb_assistant@5"
                 },
                 {

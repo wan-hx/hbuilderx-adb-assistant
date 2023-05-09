@@ -66,6 +66,12 @@ function activate(context) {
         adb_assistant("shell_pm_list_packages", param);
     });
     context.subscriptions.push(adb_shell_pm_list_packages);
+
+    // 读取应用的 ART 配置文件
+    let adb_shell_cmd_package_dump_profiles = hx.commands.registerCommand('adb_assistant.shell_cmd_package_dump_profiles', (param) => {
+        adb_assistant("shell_cmd_package_dump_profiles", param);
+    });
+    context.subscriptions.push(adb_shell_cmd_package_dump_profiles);
 };
 
 

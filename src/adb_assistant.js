@@ -20,6 +20,7 @@ const {
     adb_shell_am_start_time
 } = require("./utils/adb_shell_am.js");
 
+const adb_shell_cmd_package_dump_profiles = require('./utils/adb_shell_cmd_package_dump_profiles.js');
 const adb_shell_dumpsys_meminfo = require('./utils/adb_shell_dumpsys_meminfo.js');
 const {
     adb_shell_pm_clear,
@@ -86,6 +87,9 @@ async function adb_assistant(action, param) {
             break;
         case 'shell_pm_list_packages':
             adb_shell_pm_list_packages(adbPath, serialno_id);
+            break;
+        case 'shell_cmd_package_dump_profiles':
+            adb_shell_cmd_package_dump_profiles(adbPath, serialno_id);
             break;
         default:
             break;

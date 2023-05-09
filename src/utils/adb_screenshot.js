@@ -32,10 +32,10 @@ async function adb_screenshot(adbPath, serialno_id) {
 
     // 截图成功后，将截图保存到电脑桌面
     if (screencap_result == "" || screencap_result == undefined) {
-        let pc_screenshot_path = path.join(os.homedir(), "Desktop", screenshot_name);
-        let cmd_for_pull = `${adbPath} -s ${serialno_id} pull ${phone_screen_path} ${pc_screenshot_path}`;
+        let pc_path = path.join(os.homedir(), "Desktop", screenshot_name);
+        let cmd_for_pull = `${adbPath} -s ${serialno_id} pull ${phone_screen_path} ${pc_path}`;
         adbRun(cmd_for_pull).then( ()=> {
-            hxConsoleOutputForLink(`截图从手机发送到电脑，具体路径: ${pc_screenshot_path}`, pc_screenshot_path, "success");
+            hxConsoleOutputForLink(`截图从手机发送到电脑，具体路径: ${pc_path}`, pc_path, "success");
         }).catch((err) => {
             hxConsoleOutput(`将截图从手机向电脑传送时失败.具体错误: ${err}`, 'error');
         });
