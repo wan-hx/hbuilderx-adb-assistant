@@ -69,7 +69,7 @@
             },
             {
                 "command": "adb_assistant.shell_pm_list_packages",
-                "title": "列出系统所有软件包信息(&P)"
+                "title": "列出手机软件包列表(&P)"
             }
         ],
         "menus": {

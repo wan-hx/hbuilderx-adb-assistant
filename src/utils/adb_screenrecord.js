@@ -21,7 +21,7 @@ async function adb_screenrecord(adbPath, serialno_id) {
     let screenrecord_name = `screenrecord_${current_time}.mp4`;
     let phone_screenrecord_path = `/sdcard/${screenrecord_name}`;
 
-    // 开始截图
+    // 开始录制屏幕
     let cmd = `${adbPath} -s ${serialno_id} shell screenrecord -p ${phone_screenrecord_path}`;
     let screencap_result = await adbRun(cmd).then(() => {
         hxConsoleOutput(`手机屏幕录制成功，已保存到手机${phone_screenrecord_path}`);
@@ -30,14 +30,14 @@ async function adb_screenrecord(adbPath, serialno_id) {
         hxConsoleOutput(`具体错误: ${err}`, 'error');
     });
 
-    // 截图成功后，将截图保存到电脑桌面
+    // 录制屏幕成功后，将录制屏幕保存到电脑桌面
     if (screencap_result == "" || screencap_result == undefined) {
         let pc_screenrecord_path = path.join(os.homedir(), "Desktop", screenrecord_name);
         let cmd_for_pull = `${adbPath} -s ${serialno_id} pull ${phone_screenrecord_path} ${pc_screenrecord_path}`;
         adbRun(cmd_for_pull).then( ()=> {
-            hxConsoleOutputForLink(`截图从手机发送到电脑，具体路径: ${pc_screenrecord_path}`, pc_screenrecord_path, "success");
+            hxConsoleOutputForLink(`录制视频从手机发送到电脑，具体路径: ${pc_screenrecord_path}`, pc_screenrecord_path, "success");
         }).catch((err) => {
-            hxConsoleOutput(`将截图从手机向电脑传送时失败.具体错误: ${err}`, 'error');
+            hxConsoleOutput(`将录制视频从手机向电脑传送时失败.具体错误: ${err}`, 'error');
         });
     };
 };
